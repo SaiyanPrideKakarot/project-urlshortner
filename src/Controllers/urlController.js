@@ -99,7 +99,7 @@ const goToPage = async function (req, res) {
         } else {
             let findUrl = await urlModel.findOne({ urlCode: urlCode })
             if (!findUrl) {
-                return res.status(400).send({ status: false, message: "Invalid request" })
+                return res.status(404).send({ status: false, message: "Short Url is Invalid. Long Url for this short Url not found" })
             } else {
                 await SET_ASYNC(`${urlCode}`, JSON.stringify(findUrl))
                 return res.status(302).redirect(findUrl.longUrl)
